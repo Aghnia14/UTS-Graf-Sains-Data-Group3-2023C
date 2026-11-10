@@ -1,4 +1,4 @@
-# 10 film paling mirip avengers: infinity war
+// 10 film paling mirip avengers: infinity war
 MATCH (m:Movie {movieId: '122912'})-[s:SIMILARITY]->(similar:Movie)
 WHERE s.method = 'cosine_rating'
 RETURN
@@ -9,7 +9,7 @@ RETURN
 ORDER BY s.value DESC
 LIMIT 10;
 
-# graf hubungan film
+// graf hubungan film
 MATCH (m:Movie {movieId: '122912'})-[s:SIMILARITY]->(similar:Movie)
 WHERE s.method = 'cosine_rating'
 RETURN m, s, similar
