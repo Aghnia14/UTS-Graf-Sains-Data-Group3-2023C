@@ -140,4 +140,4 @@ Secara keseluruhan, sistem telah mengimplementasikan proses Item-Based Collabora
 | `evaluasi_item_based.py` | Script evaluasi model Item-Based Collaborative Filtering. |
 | `similarity_queries.cypher` | Query Cypher untuk melihat hasil similarity dan visualisasi hubungan antarfilm. |
 | `recommendation_queries.cypher` | Query Cypher untuk menampilkan riwayat rating dan rekomendasi film pengguna. |
-| `CONCLUSION.md` | Dokumentasi hasil, evaluasi, dan kesimpulan Item-Based Collaborative Filtering. |
+| `item_based_conclusion.md` | Dokumentasi hasil, evaluasi, dan kesimpulan Item-Based Collaborative Filtering. |
