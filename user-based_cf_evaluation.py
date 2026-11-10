@@ -1,3 +1,6 @@
+# USER BASED - BINARY APPROACH
+# Elizabeth Hanov - 23031554055
+
 import getpass
 from collections import defaultdict
 
@@ -53,7 +56,6 @@ def preprocess(df):
 
     df["rating"] = pd.to_numeric(df["rating"], errors="coerce")
 
-    # ID kosong dianggap tidak valid.
     for column in ["userId", "movieId"]:
         df[column] = df[column].astype("string").str.strip()
         df[column] = df[column].replace("", pd.NA)
@@ -67,13 +69,10 @@ def preprocess(df):
     print("Baris tidak valid:", int((~valid).sum()))
     df = df.loc[valid].copy()
 
-    # Hapus pengulangan yang benar-benar identik.
     before = len(df)
     df = df.drop_duplicates(["userId", "movieId", "rating"])
     print("Duplikat identik dihapus:", before - len(df))
 
-    # Rating berbeda untuk pasangan yang sama perlu diperiksa.
-    # Jangan memilih rating secara sembarang tanpa timestamp.
     conflicts = df.duplicated(
         ["userId", "movieId"], keep=False
     )
@@ -183,7 +182,6 @@ def score_movies(user, train, neighbors):
             if movie in seen:
                 continue
 
-            # Rating rendah ikut berkontribusi.
             numerator[movie] += similarity * rating
             denominator[movie] += similarity
             support[movie] += 1
@@ -220,7 +218,6 @@ def evaluate(train, test, neighbors):
             if movie in scores:
                 errors.append(scores[movie] - actual)
 
-        # Hanya film dengan minimal 3 tetangga pendukung.
         eligible_movies = [
             movie
             for movie in scores
@@ -249,7 +246,6 @@ def evaluate(train, test, neighbors):
             if rating >= RELEVANT_RATING
         }
 
-        # Macro-average pada user dengan film relevan testing.
         if not relevant:
             continue
 
@@ -259,8 +255,6 @@ def evaluate(train, test, neighbors):
 
         hits = len(set(ranked) & relevant)
 
-        # Jika rekomendasi kurang dari 10, slot kosong
-        # tetap dihitung sebagai tidak cocok.
         precision_values.append(hits / TOP_N)
         recall_values.append(hits / len(relevant))
 
