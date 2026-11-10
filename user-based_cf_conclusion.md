@@ -1,4 +1,6 @@
 # Pembahasan Graph dan Evaluasi Sistem Rekomendasi Film
+# User Based - Binary Approach 
+# Elizabeth Hanov - 23031554055
 
 ## 1. Hasil Visualisasi Graph Neo4j
 
@@ -93,25 +95,7 @@ Precision@10 sebesar 5,35% berarti rata-rata sekitar 0,535 dari sepuluh rekomend
 
 Film rekomendasi yang tidak terdapat dalam kumpulan film relevan testing tidak dihitung sebagai kecocokan. Hal tersebut tidak otomatis membuktikan bahwa pengguna tidak menyukai film itu. Karena itu, metrik ini tidak sama dengan persentase kepuasan pengguna maupun akurasi klasifikasi.
 
-### 2.4. Perbandingan Sebelum dan Sesudah Perubahan Pemilihan Rekomendasi
-
-Perbandingan berikut menggunakan hasil dua percobaan cosine biner dengan pembagian data yang sama. Perubahan mencakup syarat minimal tiga tetangga pendukung dan pembulatan skor hingga sepuluh angka desimal untuk pengurutan, sehingga perbedaan numerik yang sangat kecil tidak mengalahkan pemecah seri jumlah pendukung.
-
-| Metrik | Sebelum perubahan | Sesudah perubahan |
-|---|---:|---:|
-| Cakupan prediksi | 86,91% | 86,91% |
-| MAE | 0,7690 | 0,7690 |
-| RMSE | 0,9991 | 0,9991 |
-| Pengguna yang dievaluasi pada top-10 | 604 | 604 |
-| Rata-rata jumlah rekomendasi | 10,00 | 10,00 |
-| Precision@10 | 0,0098 | 0,0535 |
-| Recall@10 | 0,0149 | 0,0716 |
-
-Precision@10 meningkat sekitar 5,46 kali, sedangkan Recall@10 meningkat sekitar 4,81 kali berdasarkan nilai yang ditampilkan. Peningkatan tersebut menunjukkan bahwa perubahan pemilihan kandidat dan pengurutan membantu rekomendasi pada pembagian data ini. Pengaruh masing-masing perubahan belum dipisahkan melalui percobaan tersendiri.
-
-MAE, RMSE, dan cakupan prediksi tetap sama karena perubahan hanya diterapkan pada pemilihan rekomendasi, bukan pada perhitungan prediksi rating. Hasil evaluasi lama yang memakai cosine nilai rating tidak dimasukkan ke tabel ini karena metode dan pembagian datanya berbeda.
-
-### 2.5. Sepuluh Rekomendasi User 1 dari Data Training
+### 2.4. Sepuluh Rekomendasi User 1 dari Data Training
 
 | Peringkat | ID film | Skor rekomendasi | Jumlah tetangga pendukung |
 |---|---:|---:|---:|
@@ -132,7 +116,7 @@ Skor rekomendasi bukan probabilitas bahwa pengguna akan menyukai film. Film dala
 
 ## 3. Kesimpulan Akhir
 
-Visualisasi Neo4j memperlihatkan hubungan antara pengguna, tetangga terdekat, dan film yang direkomendasikan sehingga asal rekomendasi dapat ditelusuri. Pada tahap evaluasi, sistem user-based collaborative filtering dengan cosine biner dapat memprediksi sebagian besar rating testing dan menghasilkan sepuluh rekomendasi bagi seluruh pengguna yang memenuhi syarat evaluasi top-10. Penerapan minimal tiga tetangga pendukung disertai penyesuaian pengurutan skor meningkatkan Precision@10 menjadi 0,0535 dan Recall@10 menjadi 0,0716, tanpa mengurangi jumlah rekomendasi yang tersedia pada percobaan ini.
+Visualisasi Neo4j memperlihatkan hubungan antara pengguna, tetangga terdekat, dan film yang direkomendasikan sehingga asal rekomendasi dapat ditelusuri. Pada tahap evaluasi, sistem user-based collaborative filtering dengan cosine biner dapat memprediksi sebagian besar rating testing dan menghasilkan sepuluh rekomendasi bagi seluruh pengguna yang memenuhi syarat evaluasi top-10. 
 
 Meskipun meningkat dibandingkan konfigurasi sebelumnya, kecocokan rekomendasi terhadap film relevan testing masih terbatas. Hasil ini belum cukup untuk menyatakan sistem memiliki kualitas rekomendasi yang tinggi. Perbandingan dengan baseline, seperti rekomendasi film terpopuler dari data training, diperlukan untuk menilai manfaat metode secara lebih jelas.
 
