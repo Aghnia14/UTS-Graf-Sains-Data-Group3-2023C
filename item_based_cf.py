@@ -1,5 +1,5 @@
 # Item-Based Weighted Collaborative Filtering
-# Cosine Similarity on Weighted Ratings
+# Cosine Similarity on Weighted Items
 
 from neo4j import GraphDatabase
 from getpass import getpass
