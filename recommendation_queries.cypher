@@ -1,4 +1,7 @@
-# rekomendasi top 10 untuk userid 1
+// VISUALISASI REKOMENDASI FILM — NEO4J
+// Item-Based Weighted Collaborative Filtering
+
+// 1. rekomendasi top 10 untuk userid 1
 MATCH (u:User {userId: '1'})-[r:RATED]->(watched:Movie)
 WHERE toFloat(r.rating) >= 4.0
 
@@ -23,7 +26,7 @@ RETURN
 ORDER BY predicted_score DESC, supporting_movies DESC
 LIMIT 10;
 
-# riwayat film userid 1
+// 2. riwayat film userid 1
 MATCH (u:User {userId: '1'})-[r:RATED]->(m:Movie)
 RETURN
     u.userId AS user_id,
@@ -31,7 +34,7 @@ RETURN
     toFloat(r.rating) AS rating
 ORDER BY rating DESC, film_yang_ditonton;
 
-# film yang disukai userid 1 (rating >= 4)
+// 3. film yang disukai userid 1 (rating >= 4)
 MATCH (u:User {userId: '1'})-[r:RATED]->(m:Movie)
 WHERE toFloat(r.rating) >= 4.0
 RETURN
